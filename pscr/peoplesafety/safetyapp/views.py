@@ -152,7 +152,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from .models import UserProfile
 
-TWO_FACTOR_API_KEY = "cb6ba1dc-f345-11ef-8b17-0200cd936042"
+TWO_FACTOR_API_KEY = ""
 
 @csrf_exempt
 def send_otp(request):

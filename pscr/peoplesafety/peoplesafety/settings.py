@@ -148,7 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL='safetyapp.UserProfile'
 
-FAST2SMS_API_KEY="KgvbMGSTJY6c8FurPpC34AXiZEslmHawnRhIB0tfNyW5dx7eOq7ZuNGRKJPnwxbWjtE3OMHvUfyYl2LD"
+FAST2SMS_API_KEY=""
 
 ALLOWED_HOSTS=['127.0.0.1','localhost','arnold-opinions-toolbar-perth.trycloudflare.com']
 
