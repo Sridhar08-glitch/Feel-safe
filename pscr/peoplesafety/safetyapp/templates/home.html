@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety & Crime Report</title>
+    <link rel="stylesheet" href="{% static 'css/homestyle.css' %}">
+</head>
+<style>
+    body{
+        background-color:  #1A1A2E;
+    }
+    header{
+        background-color:#003366;
+    }
+    h1{
+        color: whitesmoke;
+    }
+    .thiru{height: 130px;
+    margin-left: 40px;} 
+</style>
+<body>
+    <header>
+ 
+        <img class="thiru" src="{% static 'images/logo3.png'%}" alt="">
+
+    
+    <h1>People Safety & Crime Report</h1>
+</div>
+    <div class="menu">
+        <a href="{% url 'notifications' %}">
+            <img src="{% static 'images/notification.png' %}" alt="Notifications" class="icon">
+        </a>
+        <div class="dropdown">
+            <img src="{% static 'images/iconimg.png' %}" alt="Profile" class="icon" onclick="toggleMenu()">
+            <div class="dropdown-content" id="settingsMenu">
+                <a href="{% url 'profile' %}">Personal Information</a>
+                <a href="{% url 'emcontact' %}">My Emergency Contacts</a>
+                
+                <a href="{% url 'login' %}">Logout</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+ 
+    <main>
+        <div class="sos-container">
+            <button id="sosButton" class="sos-button">SOS</button>
+            
+    
+
+    <script>
+        document.getElementById('sosButton').addEventListener('click', function() {
+            // Confirm before sending
+            if (!confirm('Are you sure you want to send an SOS alert?')) return;
+        
+            // Get user location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendSOS, handleGeoError);
+            } else {
+                alert('Geolocation is not supported by your browser');
+            }
+        });
+        
+        // Function to send SOS request
+        function sendSOS(position) {
+            const formData = new FormData();
+            formData.append('latitude', position.coords.latitude);
+            formData.append('longitude', position.coords.longitude);
+        
+            fetch('/sos/', {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': getCSRFToken()  // Fetch CSRF token correctly
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('SOS alert sent successfully!'+data.message);
+                } else if (data.status === 'partial_success') {
+                    alert('SOS sent, but failed for some contacts: ' + data.message);
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to send SOS alert');
+            });
+        }
+        
+        // Function to handle geolocation errors
+        function handleGeoError(error) {
+            let message = 'Error getting location: ';
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    message += 'User denied the request for Geolocation.';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    message += 'Location information is unavailable.';
+                    break;
+                case error.TIMEOUT:
+                    message += 'The request to get user location timed out.';
+                    break;
+                case error.UNKNOWN_ERROR:
+                    message += 'An unknown error occurred.';
+                    break;
+            }
+            alert(message);
+        }
+        
+        // Function to get CSRF token from cookies
+        function getCSRFToken() {
+            return document.cookie.split('; ')
+                .find(row => row.startsWith('csrftoken='))
+                ?.split('=')[1];
+        }
+        </script>
+            
+
+        </div>
+        <div class="grid-container">
+            <div class="grid-item"><a class="anchor"  href="{% url 'reportcrime' %}">
+                <img src="{% static 'images/rep crime.png' %}" alt="Report crime"/></a></div>
+            <div class="grid-item"><a class="anchor" href="{% url 'police_station' %}"><img src="{% static 'images/nb police.webp' %}" alt="nearby police"/></a></div>
+            <div class="grid-item"><a class="anchor" href="{% url 'emcontact' %}">
+                <img src="{% static 'images/emergency.png' %}" alt="emergency"/></a></div>
+            <div class="grid-item"><a class="anchor" href="{% url 'pofficial' %}">
+                <img src="{% static 'images/pb Officials.png' %}" alt="pb Officials"/></a></div>
+            <div class="grid-item"><a class="anchor" href="{% url 'danger' %}"><img src="{% static 'images/track.png' %}" alt="danger"/></a></div>
+            <div class="grid-item"><a class="anchor" href="{% url 'viewreports' %}"><img src="{% static 'images/viewrecords.png' %}" alt="viewreports"/></a></div>
+            <div class="grid-item"><a href="{% url 'room' room_name='general' username='mohanvijay' %}"><img src="{% static 'images/livechat.png' %}" alt="live chat"/></a></div>
+            <div class="grid-item"><a class="anchor" href="{% url 'safe_places' %}"><img src="{% static 'images/sf place.png' %}" alt="safeplace"/></a></div>
+        </div>
+    </main>
+    
+    <script src="{% static 'js/homejs.js' %}"></script>
+</body>
+</html>

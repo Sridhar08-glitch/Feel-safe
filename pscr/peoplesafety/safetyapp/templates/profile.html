@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="a.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>User Profile</h2>
+       
+
+        <form method="post" class="profile-form">
+            {% csrf_token %}
+
+            <label>Username:</label>
+            <input type="text" name="username" value="{{ user.username }}" required>
+
+            <label>Email:</label>
+            <input type="email" name="email" value="{{ user.email }}" required>
+            <label>DOB:[yy-mm-dd]</label>
+            <input type="text" name="dob" value="{{ user.dob }}" required>
+
+            <label>Phone Number:</label>
+            <input type="text" name="phone_number" value="{{ user.phone_number }}" required>
+
+            <label>Gender:</label>
+            <select name="gender">
+                <option value="Male" {% if profile.gender == "Male" %}selected{% endif %}>Male</option>
+                <option value="Female" {% if profile.gender == "Female" %}selected{% endif %}>Female</option>
+                <option value="Other" {% if profile.gender == "Other" %}selected{% endif %}>Other</option>
+            </select>
+
+
+            <button id="submitbutton">Update Profile</button>
+            
+    </form>
+    </div>
+    <script>
+        document.getElementById("submitbutton").addEventListener("click", function() {
+          setTimeout(function() {
+            alert("You Have Successfully Updated Profile");
+          }, 1000); // Delay in milliseconds (1000ms = 1s)
+        });
+      </script>
+    
+    
+    
+    
+        
+    
+
+</body>
+
+</html>

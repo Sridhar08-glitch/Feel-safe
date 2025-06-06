@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live User Tracking</title>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("bg.png"), -webkit-linear-gradient(bottom, #0250c5, #d43f8d);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 10px;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .map-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        #map {
+            height: 650px;
+            width: 1200px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        
+     
+        <button class="back-button" onclick="goBack()">
+            <a href="{%url 'home'%}">
+            <i class="bi bi-house"></i>
+       
+        </a>
+        </button>
+        <button class="back-button" onclick="goBack()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+                <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+            </svg>
+        </button>
+      
+        <div class="spans">
+       <a href="{%url 'report_crime'%}"> <h5> Report Crime |</h5></a>
+        <a href="{% url 'police_station' %}"> <h5> &nbsp Nearby Police |</h5></a>
+       <a href="{% url 'emcontact' %}"> <h5> &nbsp Emergency Contact |</h5></a>
+        <a href="{% url 'danger' %}"><h5> &nbsp Danger Contact |</h5></a>
+        <a href="{% url 'viewreports' %}"><h5>&nbsp Report Record |</h5></a>
+        <a href="{% url 'room' room_name='general' username='mohanvijay' %}"><h5>&nbsp Live Chat |</h5></a>
+       <a href="{% url 'safe_places' %}"> <h5>&nbsp Safe Place</h5></a>
+    </div>
+  
+    </header>
+
+
+
+    <div class="header">
+        <button class="back-button" onclick="goHome()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6.5 6.5a.5.5 0 0 0 .708.708L2 7.707V13.5A1.5 1.5 0 0 0 3.5 15h3a.5.5 0 0 0 .5-.5V10h2v4.5a.5.5 0 0 0 .5.5h3A1.5 1.5 0 0 0 14 13.5V7.707l1.146 1.147a.5.5 0 0 0 .708-.708l-6.5-6.5z"/>
+            </svg>
+        </button>
+        <h2>Live User Tracking</h2>
+    </div>
+
+    <div class="map-container">
+        <div id="map"></div>
+    </div>
+
+    <script>
+        function goHome() {
+            window.location.href = "home.html"; // Change this to your actual home page URL
+        }
+
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3JpZGhhcjA4IiwiYSI6ImNtN284Z212bzA5cmIybW9wcXc1enlpM20ifQ.BEcIZJ9lF9IPy_hSmcH-vQ';
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [80.2707, 13.0827], // Initial Location (Chennai)
+            zoom: 12
+        });
+
+        var userMarker = new mapboxgl.Marker({ color: "blue" }).setLngLat([80.2707, 13.0827]).addTo(map);
+
+        var userPath = {
+            type: "FeatureCollection",
+            features: []
+        };
+
+        map.on('load', function () {
+            map.addSource('user-path', {
+                type: 'geojson',
+                data: userPath
+            });
+
+            map.addLayer({
+                id: 'path-layer',
+                type: 'line',
+                source: 'user-path',
+                layout: { "line-join": "round", "line-cap": "round" },
+                paint: { "line-color": "#007bff", "line-width": 4 }
+            });
+        });
+
+        function updateLocation(position) {
+            let lat = position.coords.latitude;
+            let lng = position.coords.longitude;
+
+            userMarker.setLngLat([lng, lat]);
+            map.setCenter([lng, lat]);
+
+            userPath.features.push({
+                type: "Feature",
+                geometry: { type: "Point", coordinates: [lng, lat] }
+            });
+
+            map.getSource('user-path').setData(userPath);
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(updateLocation, console.error, { enableHighAccuracy: true });
+        } else {
+            alert("Geolocation not supported.");
+        }
+    </script>
+
+</body>
+</html>

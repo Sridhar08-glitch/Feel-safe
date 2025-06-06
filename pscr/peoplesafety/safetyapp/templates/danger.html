@@ -1,0 +1,284 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Safe Places</title>
+    
+    <!-- Mapbox CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <style>
+        body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        #map { width: 100%; height: 500px; }
+        #loading { text-align: center; margin-top: 10px; font-size: 18px; }
+
+        .back-button {
+            background-color: transparent;
+        }
+        
+        header {
+            background-color: white;
+            color: black;
+            height: 8vh;
+            margin: 0;
+        }
+        
+        body {
+            margin: 0;
+        }
+        
+        span {
+            display: flex;
+            
+        
+            
+        }
+        
+        button {
+            height: 30px;
+            margin-left: 3%;
+            
+        }
+        
+        .header2 {
+            background: linear-gradient(to right, #d43f8d);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+       
+        }
+        
+        .header2 {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+           
+            width: 100%;
+            background-color: lightsteelblue;
+        }
+        
+        .thiru {
+            height: 10%;
+            width: 10%;
+            padding-left: 3%;
+        
+        
+        }
+        
+        h1 {
+            padding-right: 35%;
+            width: 100%;
+            color: black;
+        }
+        
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .menu {
+            padding-right: 4%;
+        
+        }
+        
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 10px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        
+        }
+        
+        .show {
+            display: block;
+        }
+        
+        .icon {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin-left: 15px;
+            padding-right: 15%;
+        }
+        
+        .a {
+            color: rgb(20, 20, 20);
+        }
+        
+        .icons img {
+            width: 30px;
+            margin-right: 15px;
+        }
+        header{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            width: 100%;
+            margin: 0;
+            
+        }
+        h5{
+            display: flex;
+            flex-direction: row;
+            font-size: 60%;
+            width: 100%;
+          
+           
+        }
+        
+        .spans{
+            display: flex;
+            width: 100%;
+           
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            
+        }
+        .header2{
+            
+            width: 100%;
+        }
+        header{
+            height: 10vh;
+        }
+       .spans{
+        font-size: 120%;
+        width: 100%;
+        margin-left: 6%;
+        
+       }
+      header{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    
+      }
+      .back-button{
+        width: 5%;
+        height: 60%;
+        background-color: lightblue;
+    
+      }
+      h5{
+        font-size: 90%;
+     
+      }
+      h2{
+        display: flex;
+        justify-content: center;
+      }
+      .header2{
+        background-color: #003366;
+        color: whitesmoke;
+      }
+      header{
+        background-color: #1A1A2E;
+        
+      }
+      h5{
+        color: whitesmoke;
+      } 
+      body{
+        background-color: #d43f8d;
+      }
+    </style>
+</head>
+<body>
+    
+    <header>
+        
+     
+        <button class="back-button" onclick="goBack()">
+            <a href="{%url 'home'%}">
+            <i class="bi bi-house"></i>
+       
+        </a>
+        </button>
+        <button class="back-button" onclick="goBack()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+                <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+            </svg>
+        </button>
+      
+        <div class="spans">
+       <a href="{%url 'report_crime'%}"> <h5> Report Crime |</h5></a>
+        <a href="{% url 'police_station' %}"> <h5> &nbsp Nearby Police |</h5></a>
+       <a href="{% url 'emcontact' %}"> <h5> &nbsp Emergency Contact |</h5></a>
+        <a href="{% url 'danger' %}"><h5> &nbsp Danger Contact |</h5></a>
+        <a href="{% url 'viewreports' %}"><h5>&nbsp Report Record |</h5></a>
+        <a href="{% url 'room' room_name='general' username='mohanvijay' %}"><h5>&nbsp Live Chat |</h5></a>
+       <a href="{% url 'safe_places' %}"> <h5>&nbsp Safe Place</h5></a>
+    </div>
+  
+    </header>
+
+
+
+
+    <h2 style="text-align: center;">Danger Prone Areas</h2>
+    <div id="map"></div>
+    <p id="loading">Fetching location...</p>
+
+    <!-- CSRF Token for JavaScript -->
+    <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+
+    <!-- Mapbox JavaScript -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3JpZGhhcjA4IiwiYSI6ImNtN284Z212bzA5cmIybW9wcXc1enlpM20ifQ.BEcIZJ9lF9IPy_hSmcH-vQ';  // Replace with your token
+
+        function getCSRFToken() {
+            return document.getElementById('csrf_token').value;
+        }
+
+        // Initialize the map
+        const map = new mapboxgl.Map({
+            container: 'map', 
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [80.2044, 13.0381], // Center of the map (Chennai)
+            zoom: 12
+        });
+
+        // Add a static marker for a specific place
+        new mapboxgl.Marker({ color: "red" }) 
+            .setLngLat([80.2707, 13.0827]) // Static place (Example: Chennai, India)
+            .setPopup(new mapboxgl.Popup().setHTML("<h4>Crime Zone</h4><p>Sla </p>"))
+            .addTo(map);
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+
+        
+        body {
+    background: url("bg.png"), -webkit-linear-gradient(bottom, #0250c5, #d43f8d);
+    min-height: 100vh;
+    padding-left: 10px;
+
+}
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background: #d43f8d;
+            color: white;
+        }
+        /* Form Styling */
+        form {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #d43f8d;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #b32d6e;
+        }

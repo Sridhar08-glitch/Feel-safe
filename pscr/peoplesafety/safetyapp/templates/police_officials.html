@@ -1,0 +1,834 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police Stations in Chennai</title>
+    <link rel="stylesheet" href="{% static 'css/pofficials.css' %}">
+</head>
+<body>
+
+    
+    
+    <button onclick="goBack()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0z"/>
+            <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+          </svg>
+        </button>
+
+    
+    <script>
+      function goBack() {
+        window.history.back();
+    }
+    </script>
+    <h2>List of Police Stations in Chennai</h2>
+    <table>
+        
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Code</th>
+                    <th>Location</th>
+                    <th>Contact Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="4">Flower Bazaar AC</td>
+                    <td>C1</td>
+                    <td>Flower Bazaar</td>
+                    <td>044-23452464/465</td>
+                </tr>
+                <tr>
+                    <td>C2</td>
+                    <td>Elephant Gate</td>
+                    <td>044-23452467/468</td>
+                </tr>
+                <tr>
+                    <td>C3</td>
+                    <td>Seven Wells</td>
+                    <td>044-23452471/472</td>
+                </tr>
+                <tr>
+                    <td>C4</td>
+                    <td>Govt. Hospital</td>
+                    <td>044-23452473</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">High Court AC</td>
+                    <td>B2</td>
+                    <td>Esplanade</td>
+                    <td>044-23452458/459</td>
+                </tr>
+                <tr>
+                    <td>B4</td>
+                    <td>High Court</td>
+                    <td>044-23452462</td>
+                </tr>
+                <tr>
+                    <td rowspan="6">Harbour AC</td>
+                    <td>B5</td>
+                    <td>Harbour</td>
+                    <td>044-23452500/501</td>
+                </tr>
+                <tr>
+                    <td>B1</td>
+                    <td>North Beach</td>
+                    <td>044-23452457/457</td>
+                </tr>
+                <tr>
+                    <td>B3</td>
+                    <td>Fort</td>
+                    <td>044-23452460/461</td>
+                </tr>
+                <tr>
+                    <td>N3</td>
+                    <td>Muthialpet</td>
+                    <td>044-23452514/515</td>
+                </tr>
+                <tr>
+                    <td>C5</td>
+                    <td>Kothavalchavadi</td>
+                    <td>044-23452474/474</td>
+                </tr>
+                <tr>
+                    <td>B6</td>
+                    <td>Port Marine</td>
+                    <td>044-23452502</td>
+                </tr>
+            
+        <tr>
+            <tr>
+                <td>Washermenpet AC</td>
+                <td>-</td>
+                <td>Washermenpet</td>
+                <td>044-23452481/481</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>H3</td>
+                <td>Tondiarpet</td>
+                <td>044-23452485/486</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>H4</td>
+                <td>Korukkupet</td>
+                <td>044-23452488/489</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>H6</td>
+                <td>R.K. Nagar</td>
+                <td>044-23452493/494</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>H2</td>
+                <td>Stanley Hospital</td>
+                <td>044-25281347</td>
+            </tr>
+            <tr>
+                <td>Thiruvottiyur AC</td>
+                <td>H8</td>
+                <td>Thiruvottiyur</td>
+                <td>044-23452496/497</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>H7</td>
+                <td>Peripheral Hospital</td>
+                <td>044-23452495</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>H5</td>
+                <td>New Washermenpet</td>
+                <td>044-23452490/491</td>
+            </tr>
+            <tr>
+                <td>Royapuram AC</td>
+                <td>N1</td>
+                <td>Royapuram</td>
+                <td>044-23452504/505</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>N2</td>
+                <td>Kasimedu</td>
+                <td>044-23452511/510</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>N4</td>
+                <td>Fishing Harbour</td>
+                <td>044-23452517/518</td>
+            </tr>
+            <tr>
+                <td>Madhavaram AC</td>
+                <td>M1</td>
+                <td>Madhavaram</td>
+                <td>044-23452783</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>M2</td>
+                <td>Milk Colony</td>
+                <td>044-2555085</td>
+            </tr>
+            <tr>
+                <td>Puzhal AC</td>
+                <td>M3</td>
+                <td>Puzhal</td>
+                <td>044-26590989</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>M4</td>
+                <td>Redhills</td>
+                <td>044-26418296</td>
+            </tr>
+            <tr>
+                <td>Ennore AC</td>
+                <td>M5</td>
+                <td>Ennore</td>
+                <td>044-25750237</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>M6</td>
+                <td>Manali</td>
+                <td>044-23452788</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>M7</td>
+                <td>Manali New Town</td>
+                <td>044-25931299</td>
+            </tr>
+            <tr>
+                <td>-</td>
+                <td>M8</td>
+                <td>Sathangadu</td>
+                <td>044-23452790</td>
+            </tr>
+           
+                <tr>
+                    <td rowspan="3">West Pulianthope AC</td>
+                    <td>P1</td>
+                    <td>Pulianthope</td>
+                    <td>044-23452520/521</td>
+                </tr>
+                <tr>
+                    <td>P2</td>
+                    <td>Otteri</td>
+                    <td>044-23452524/525</td>
+                </tr>
+                <tr>
+                    <td>P4</td>
+                    <td>Basin Bridge</td>
+                    <td>044-26670948</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">MKB Nagar AC</td>
+                    <td>P5</td>
+                    <td>MKB Nagar</td>
+                    <td>044-23452531/532</td>
+                </tr>
+                <tr>
+                    <td>P6</td>
+                    <td>Kodungaiyur</td>
+                    <td>044-25546241</td>
+                </tr>
+                <tr>
+                    <td>P3</td>
+                    <td>Vyasarpadi</td>
+                    <td>044-23452527/526</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Sembium AC</td>
+                    <td>K1</td>
+                    <td>Sembium</td>
+                    <td>044-23452710/711</td>
+                </tr>
+                <tr>
+                    <td>K5</td>
+                    <td>Peravallur</td>
+                    <td>044-23452727/728</td>
+                </tr>
+                <tr>
+                    <td>K9</td>
+                    <td>Thiru Vi. Ka. Nagar</td>
+                    <td>044-23452736/737</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Anna Nagar AC</td>
+                    <td>K3</td>
+                    <td>Aminjikarai</td>
+                    <td>044-23452716/717</td>
+                </tr>
+                <tr>
+                    <td>K4</td>
+                    <td>Anna Nagar</td>
+                    <td>044-23452719/720</td>
+                </tr>
+                <tr>
+                    <td>K8</td>
+                    <td>Arumbakkam</td>
+                    <td>044-23452733</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Thirumangalam AC</td>
+                    <td>V3</td>
+                    <td>J.J. Nagar</td>
+                    <td>044-23452748/749</td>
+                </tr>
+                <tr>
+                    <td>V5</td>
+                    <td>Thirumangalam</td>
+                    <td>044-23452753/754</td>
+                </tr>
+                <tr>
+                    <td>V7</td>
+                    <td>Nolambur</td>
+                    <td>9940596447</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Koyambedu</td>
+                    <td>K10</td>
+                    <td>Koyambedu</td>
+                    <td>044-23452739</td>
+                </tr>
+                <tr>
+                    <td>T4</td>
+                    <td>Maduravoyal</td>
+                    <td>044-23452766</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>CMBT</td>
+                    <td>9677099958</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Villivakkam AC</td>
+                    <td>V1</td>
+                    <td>Villivakkam</td>
+                    <td>044-23452744/745</td>
+                </tr>
+                <tr>
+                    <td>V4</td>
+                    <td>Rajamangalam</td>
+                    <td>044-23452750/751</td>
+                </tr>
+                <tr>
+                    <td>V6</td>
+                    <td>Kolathur</td>
+                    <td>044-23452758</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">Ambattur AC</td>
+                    <td>T1</td>
+                    <td>Ambattur</td>
+                    <td>044-23452797</td>
+                </tr>
+                <tr>
+                    <td>T2</td>
+                    <td>Ambattur Estate</td>
+                    <td>044-23452798</td>
+                </tr>
+                <tr>
+                    <td>T3</td>
+                    <td>Korattur</td>
+                    <td>044-23452799</td>
+                </tr>
+                <tr>
+                    <td>Avadi AC</td>
+                    <td>T6</td>
+                    <td>Avadi</td>
+                    <td>044-26554750</td>
+                </tr>
+            
+            
+        <tr>
+            <td>-</td>
+            <td>T7</td>
+            <td>Tank Factory</td>
+            <td>044-23452771</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>T10</td>
+            <td>Thirumullaivoyal</td>
+            <td>044-23452772</td>
+        </tr>
+        <tr>
+            <td>Pattabiram AC</td>
+            <td>T11</td>
+            <td> Thirunindravur</td>
+            <td>044-26390293</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>T8</td>
+           <td> Muthapudupet</td>
+            <td>044-26841795</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>T9</td>
+            <td>Pattabiram</td>
+            <td>044-26851632</td>
+        </tr>
+        <tr>
+            <td>Poonamallee AC</td>
+            <td>T12</td> 
+            <td>Poonamallee</td>
+            <td>044-26272082</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>T16</td>
+            <td>Nasaratpet</td>
+            <td>044-26271414</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>T5</td>
+            <td>Thiruverkadu</td>
+            <td>044-26800091</td>
+        </tr>
+        <tr>
+            <td>SRMC AC</td>
+            <td>T15</td>
+            <td>SRMC</td>
+            <td>044-23452767</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>T14</td>
+            <td> Mangadu</td>
+            <td>044-26791102</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>T13</td>
+            <td>Kunrathur</td>
+            <td>044-24780039</td>
+        </tr>
+      
+        <tr>
+            <td>Kilpauk AC</td>
+            <td>K6</td>
+            <td>TP Chathiram</td>
+            <td>044-23452729/730</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>G3</td>
+            <td> Kilpauk</td>
+            <td>044-23452699/700</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>G7</td>
+            <td>Chetpet</td>
+            <td>044-23452686</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>G6</td>
+            <td>KMC Hospital</td>
+            <td>044-23452709</td>
+        </tr>
+        <tr>
+            <td>Vepery AC</td>
+            <td>G1</td>
+            <td>Vepery</td>
+            <td>044-23452690/691</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>G2</td>
+            <td>Periamet</td>
+            <td>044-23452696/697</td>
+        </tr>
+        <tr>
+            <td>Ayanavaram AC</td>
+            <td>K2</td>
+            <td>Ayanavaram</td>
+            <td>044-23452714/715</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>K7</td>
+            <td>ICF</td>
+            <td>044-23452731/732</td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>G4</td>
+            <td>Mental Hospital</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>-</td>
+            <td>G5</td>
+            <td>Secretariat Colony</td>
+            <td>044-23452704/706</td>
+        </tr>
+        <tr>
+            <td>Triplicane AC</td>
+            <td>Triplicane AC</td>
+            <td>D1 Triplicane</td>
+            <td>044-23452655/656</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Triplicane AC</td>
+            <td>D8 K.G. Hospital</td>
+            <td>044-23452672</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Triplicane AC</td>
+            <td>D2 Annasalai</td>
+            <td>044-23452661/662</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Triplicane AC</td>
+            <td>D4 Zam Bazaar</td>
+            <td>044-23452665/666</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Triplicane AC</td>
+            <td>D6 Anna Square</td>
+            <td>044-23452667/668</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Egmore AC</td>
+            <td>F1 Chintadaripet</td>
+            <td>044-23452673/674</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Egmore AC</td>
+            <td>F2 Egmore</td>
+            <td>044-23452677/678</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Egmore AC</td>
+            <td>F7 Maternity Hospital</td>
+            <td>044-23452689</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Nungambakkam AC</td>
+            <td>F3 Nungambakkam</td>
+            <td>044-23452680/681</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Nungambakkam AC</td>
+            <td>F4 Thousand Lights</td>
+            <td>044-23452684/683</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Nungambakkam AC</td>
+            <td>R5 Choolaimedu</td>
+            <td>044-23452742/743</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Mylapore AC</td>
+            <td>E1 Mylapore</td>
+            <td>044-23452562</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>ylapore AC</td>
+            <td>E5 Foreshore Estate</td>
+            <td>044-23452575</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>ylapore AC</td>
+            <td>D5 Marina</td>
+            <td>044-23452558/559</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Kotturpuram AC</td>
+            <td>E4 Abiramapuram</td>
+            <td>044-23452571/572</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>otturpuram AC</td>
+            <td>J2 Kotturpuram</td>
+            <td>044-23452595/596</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Royapettah AC</td>
+            <td>E2 Royapettah</td>
+            <td>044-23452567/565</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Royapettah AC</td>
+            <td>D3 Ice House</td>
+            <td>044-23452556/555</td>
+        </tr>
+        <tr>
+            <td>East/Central</td>
+            <td>Royapettah AC</td>
+            <td>E6 Govt. Royapettah</td>
+            <td>044-23452576</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>St.Thomas Mount AC</td>
+            <td>S1 St. Thomas Mount</td>
+            <td>044-23452763</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>St.Thomas Mount AC</td>
+            <td>S4 Nandampakkam</td>
+            <td>044-23452765</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>St.Thomas Mount AC</td>
+            <td>S9 Palavanthangal</td>
+            <td>044-22241950</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Meenambakkam AC</td>
+            <td>S2 Airport</td>
+            <td>044-22564284</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Meenambakkam AC</td>
+            <td>S3 Meenambakkam</td>
+            <td>044-22561261</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Pallavaram AC</td>
+            <td>S5 Pallavaram</td>
+            <td>044-22640880</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Pallavar, AC</td>
+            <td>S6 Sankar Nagar</td>
+            <td>044-22484094</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Tambaram AC</td>
+            <td>S11 Tambaram</td>
+            <td>044-23452769</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Tambaram AC</td>
+            <td>S13 Chrompet</td>
+            <td>044-23452770</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Selaiyur AC</td>
+            <td>S15 Selaiyur</td>
+            <td>044-22396003</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Selaiyur AC</td>
+            <td>S12 Chitlapakkam</td>
+            <td>044-22232005</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Selaiyur AC</td>
+            <td>S14 Peerkankaranai</td>
+            <td>044-22398018</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Madipakkam AC</td>
+            <td>S7 Madipakkam</td>
+            <td>044-23452774</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Madipakkam AC</td>
+            <td>S8 Adambakkam</td>
+            <td>044-23452777</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Madipakkam AC</td>
+            <td>S10 Pallikaranai</td>
+            <td>044-23452775</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Adyar AC</td>
+            <td>J2 Adyar</td>
+            <td>044-23452583/584</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Adayar AC</td>
+            <td>J5 Sastri Nagar</td>
+            <td>044-23452598/599</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Saidapet AC</td>
+            <td>J1 Saidapet</td>
+            <td>044-23452577/578</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Saidapet AC</td>
+            <td>R6 Kumaran Nagar</td>
+            <td>044-23452629/628</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Guindy AC</td>
+            <td>J3 Guindy</td>
+            <td>044-23452590/591</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Guindy AC</td>
+            <td>J7 Velachery</td>
+            <td>044-23452605/606</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Taramani AC</td>
+            <td>J6 Thiruvanmiyur</td>
+            <td>044-23452602/603</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Taramani AC</td>
+            <td>J13 Taramani</td>
+            <td>044-22541636</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Thuraipakkam AC</td>
+            <td>J9 Thoraipakkam</td>
+            <td>044-23452776</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Thuraipakkam AC</td>
+            <td>J10 Chemmanchery</td>
+            <td>044-24500707</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Thuraipakkam AC</td>
+            <td>J11 Kannagi Nagar</td>
+            <td>9791090918</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Neelangari AC</td>
+            <td>J8 Neelangari</td>
+            <td>044-24491196</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Neelangari AC</td>
+            <td>J12 Kannathur</td>
+            <td>044-27472182</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>T.Nagar AC</td>
+            <td>R1 Mambalam</td>
+            <td>044-23452608/609</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>T.Nagar AC</td>
+            <td>R4 Soundarapandiyanar Angadi (Pondi Bazaar)</td>
+            <td>044-23452624/625</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Vadapalani AC</td>
+            <td>R8 Vadapalani</td>
+            <td>044-23452635/634</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Vadapalani AC</td>
+            <td>R5 Virugambakkam</td>
+            <td>044-23452637/638</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Valasaravakkam AC</td>
+            <td>R9 Valasaravakkam</td>
+            <td>044-23452649</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Valasaravakkam AC</td>
+            <td>R11 Royala Nagar</td>
+            <td>044-23452649 (R9 No.)</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Ashok Nagar AC</td>
+            <td>R3 Ashok Nagar</td>
+            <td>044-23452617/618</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Ashok Nagar AC</td>
+            <td>R7 K.K. Nagar</td>
+            <td>044-23452630/631</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Ashok Nagar AC</td>
+            <td>R10 MGR Nagar</td>
+            <td>044-23452560/561</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Teynampet AC</td>
+            <td>E3 Teynampet</td>
+            <td>044-23452569/568</td>
+        </tr>
+        <tr>
+            <td>South</td>
+            <td>Teynampet AC</td>
+            <td>R2 Kodambakkam</td>
+            <td>044-23452615/616</td>
+        </tr>
+        
+    </table>
+</body>
+</html>

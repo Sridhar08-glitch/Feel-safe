@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        #notification-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .notification {
+            width: 50%;
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            text-align: left;
+            border-left: 5px solid #007bff;
+        }
+
+        .notification:hover {
+            background: #f8f9fa;
+        }
+
+        .notification-box {
+            width: 50%;
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        strong {
+            color: #007bff;
+        }
+
+        small {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Crime Notifications</h2>
+
+    <div id="notification-list">
+        {% for notification in notifications %}
+            <div class="notification" onclick="showDetails('{{ notification.id }}')">
+                <strong>{{ notification.title }}</strong> <br>
+                📍 <strong>Location:</strong> {{ notification.location_of_crime }} <br>
+                🔴 <strong>Crime Type:</strong> {{ notification.crime_type }} <br>
+                🕒 {{ notification.created_at|date:"F j, Y, g:i a" }}
+            </div>
+        {% empty %}
+            <p>No new notifications.</p>
+        {% endfor %}
+    </div>
+
+    
+
+</div>
+
+</body>
+</html>

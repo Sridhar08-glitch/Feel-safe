@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>People Safety & Crime Reporting Login</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/loginpage.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+	.container{
+		display: flex;
+		justify-content: center;
+	}
+</style>
+<body>
+   
+   
+ 
+
+	
+
+	<div class="container">
+		<div class="img"></div>
+		<div class="login-content">
+			<form method="POST" action="{% url 'login_user' %}">
+				{% csrf_token %}  <!-- Protects form from CSRF attacks -->
+				<img src="{% static 'images/loginlogo.svg' %}">
+				<h2 class="title">Welcome</h2>
+
+				{% if error %}
+					<p style="color: red;">{{ error }}</p>
+				{% endif %}
+
+				<div class="input-div one">
+					<div class="i"><i class="fas fa-user"></i></div>
+					<div class="div">
+						<h5>Username</h5>
+						<input type="text" name="username" class="input" required>
+					</div>
+				</div>
+				
+				<div class="input-div pass">
+					<div class="i"><i class="fas fa-lock"></i></div>
+					<div class="div">
+						<h5>Password</h5>
+						<input type="password" name="password" class="input" required>
+					</div>
+				</div>
+                <div>
+            
+				<a href="{% url 'register' %}" class='a1'>Register Account</a>
+				<a href="{% url 'admin:index' %}">Admin Panel</a>
+
+				<a href="{% url 'forget' %}" >Forgot Password?</a>
+                </div>
+				
+				<button type="submit" class="btn">LOGIN</button>
+			</form>
+            
+	</div>
+
+</div>
+    
+	<script type="text/javascript" src="{% static 'js/home.js' %}"></script>
+</body>
+</html>

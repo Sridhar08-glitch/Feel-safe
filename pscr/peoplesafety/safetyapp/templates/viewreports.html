@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #searchBar {
+            width: 40%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function searchByLocation() {
+            let input = document.getElementById("searchBar").value.toLowerCase();
+            let rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                let location = row.cells[3].textContent.toLowerCase();  // Location column index
+                if (location.includes(input)) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    
+
+    <h1>All Crime Reports</h1>
+
+    <div class="search-container">
+        <input type="text" id="searchBar" onkeyup="searchByLocation()" placeholder="Search by location...">
+    </div>
+
+    {% if reports %}
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Report ID</th>
+                <th>Crime Type</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Victim Gender</th>
+                <th>Number of Victims</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for report in reports %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ report.id }}</td>
+                <td>{{ report.type_of_crime }}</td>
+                <td>{{ report.location_of_crime }}</td>
+                <td>{{ report.date_of_crime }}</td>
+                <td>{{ report.time_of_crime }}</td>
+                <td>{{ report.victim_gender }}</td>
+                <td>{{ report.number_of_victims }}</td>
+                <td>{{ report.description_of_crime }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No crime reports available.</p>
+    {% endif %}
+
+</body>
+</html>

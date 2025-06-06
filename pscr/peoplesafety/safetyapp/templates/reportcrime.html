@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Reporting</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/reportcrime.css' %}">
+    <!-- Mapbox -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+
+    <style>
+       #map {
+    width: 80%;
+    height: 500px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.back-button {
+    background-color: transparent;
+}
+
+header {
+    background-color: white;
+    color: black;
+    height: 7vh;
+}
+
+body {
+    margin: 0;
+}
+
+span {
+    display: flex;
+    
+
+    
+}
+
+button {
+    height: 30px;
+    margin-left: 3%;
+    
+}
+
+.header2 {
+    background: linear-gradient(to right, #d43f8d);
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header2 {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    width: 100%;
+    background-color: lightsteelblue;
+}
+
+.thiru {
+    height: 10%;
+    width: 10%;
+    padding-left: 3%;
+
+
+}
+
+h1 {
+    padding-right: 35%;
+    width: 100%;
+    color: black;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu {
+    padding-right: 4%;
+
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+
+}
+
+.show {
+    display: block;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-left: 15px;
+    padding-right: 15%;
+}
+
+.a {
+    color: rgb(20, 20, 20);
+}
+
+.icons img {
+    width: 30px;
+    margin-right: 15px;
+}
+    </style>
+</head>
+
+<body>
+    <div class="header2">
+
+
+        
+
+
+        <h1>People Safety & Crime Report</h1>
+
+        <div class="menu">
+            <img src="{% static 'images/notification.png' %}" alt="Notifications" class="icon">
+            <div class="dropdown">
+                <img src="{% static 'images/iconimg.png' %}" alt="Profile" class="icon" onclick="toggleMenu()">
+                <div class="dropdown-content" id="settingsMenu">
+                    <a href="{% url 'profile' %}">Personal Information</a>
+                    <a href="{% url 'emcontact' %}">My Emergency Contacts</a>
+                   
+                    <a href="{% url 'login' %}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </header2>
+    <header>
+        <button class="back-button" onclick="goBack()">
+            <i class="bi bi-house"></i>
+        </button>
+        <span>CRIME REPORTING</span>
+    </header>
+
+   <form method="post" action="{% url 'report_crime' %}">
+    {% csrf_token %}
+    
+    <label>Date of Crime:</label><br>
+    <input id="one" type="date" name="date_of_crime">
+
+    <label>Time of Crime:</label><br>
+    <input type="time" name="time_of_crime">
+
+    <label>Type of Crime:</label><br>
+    <select id="type-of-crime" name="type_of_crime">
+        <option value="">Select Type of Crime</option>
+        <option value="theft">Theft</option>
+        <option value="assault">Assault</option>
+        <option value="robbery">Robbery</option>
+        <option value="other">Other</option>
+    </select>
+
+    <label>Location of Crime:</label><br>
+    <input type="text" name="location_of_crime">
+
+    <label>Victim Gender:</label><br>
+    <select name="victim_gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select>
+
+    <label>Number of Victims:</label><br>
+    <input type="number" name="number_of_victims">
+
+    <label>Select Crime Location on Map</label><br>
+    <div id="map"></div>
+
+    <!-- Hidden fields for Latitude and Longitude -->
+    <input type="hidden" id="latitude" name="latitude">
+    <input type="hidden" id="longitude" name="longitude">
+
+    <label>Description of Crime:</label><br>
+    <textarea name="description_of_crime" placeholder="Write Description Of Crime......"></textarea>
+
+    <label>Description of Suspect:</label><br>
+    <textarea name="description_of_suspect" placeholder="Write Description Of Suspect....."></textarea>
+
+    <button id="submit" type="submit">Submit</button>
+</form>
+
+
+
+    <script>
+       function submitCrimeReport(event) {
+    event.preventDefault(); // Prevent page reload
+
+    let formData = {
+        date_of_crime: document.getElementById("date_of_crime").value,
+        time_of_crime: document.getElementById("time_of_crime").value,
+        type_of_crime: document.getElementById("type_of_crime").value,
+        location_of_crime: document.getElementById("location_of_crime").value,
+        latitude: document.getElementById("latitude").value,
+        longitude: document.getElementById("longitude").value,
+        victim_gender: document.getElementById("victim_gender").value,
+        number_of_victims: document.getElementById("number_of_victims").value,
+        description_of_crime: document.getElementById("description_of_crime").value,
+        description_of_suspect: document.getElementById("description_of_suspect").value
+    };
+
+    console.log("Form Data Before Sending:", formData); // Debugging
+
+    fetch("{% url 'report_crime' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        credentials: "include",
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response Data:", data); // Debugging
+      // Show success message
+        if (data.status === "success") {
+            alert("Your crime has been reported successfully!");
+            window.location.href = "{% url 'home' %}"; // Redirect after success
+        }
+    })
+    .catch(error => console.error("Error:", error));
+}
+
+
+        
+    mapboxgl.accessToken = 'pk.eyJ1Ijoic3JpZGhhcjA4IiwiYSI6ImNtN284Z212bzA5cmIybW9wcXc1enlpM20ifQ.BEcIZJ9lF9IPy_hSmcH-vQ';  // Replace with your actual Mapbox token
+
+    // Initialize the map
+    var map = new mapboxgl.Map({
+        container: 'map',  // The ID of the map div
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [77.5946, 12.9716], // Default to Bangalore, India (Replace with any default location)
+        zoom: 12
+    });
+
+    // Add zoom and rotation controls to the map
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // Function to add a marker to the map
+    function addMarker(lngLat) {
+        // Remove existing marker if any
+        if (window.currentMarker) {
+            window.currentMarker.remove();
+        }
+        
+        window.currentMarker = new mapboxgl.Marker({ draggable: true })
+            .setLngLat(lngLat)
+            .addTo(map);
+
+        // Update form fields
+        document.getElementById('latitude').value = lngLat.lat;
+        document.getElementById('longitude').value = lngLat.lng;
+
+        // Event to handle marker drag
+        window.currentMarker.on('dragend', function () {
+            var newLngLat = window.currentMarker.getLngLat();
+            document.getElementById('latitude').value = newLngLat.lat;
+            document.getElementById('longitude').value = newLngLat.lng;
+        });
+    }
+
+    // Get user's location
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+            var userLocation = [position.coords.longitude, position.coords.latitude];
+
+            // Center map on user's location
+            map.setCenter(userLocation);
+            map.setZoom(14);
+
+            // Add a marker at user's location
+            addMarker({ lat: position.coords.latitude, lng: position.coords.longitude });
+        },
+        function (error) {
+            console.error("Error getting location:", error);
+            alert("Location access denied. Please enable location services or manually select a location.");
+        }
+    );
+
+    // Allow users to click on the map to place a pin
+    map.on('click', function (e) {
+        addMarker(e.lngLat);
+    });
+
+
+
+    </script>
+    
+
+</body>
+
+</html>

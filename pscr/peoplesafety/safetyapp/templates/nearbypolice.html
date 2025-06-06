@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearby Police Stations</title>
+    
+    <!-- Mapbox CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+    
+    <style>
+        body { margin: 0; padding: 0; font-family: Arial, sans-serif;background: url("bg.png"), -webkit-linear-gradient(bottom, #0250c5, #d43f8d); }
+        #map { width: 100%; height: 500px; }
+        #loading { text-align: center; margin-top: 10px; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+
+
+    
+
+    <h2 style="text-align: center;">Nearby Police Stations</h2>
+    <div id="map"></div>
+    <p id="loading">Fetching location...</p>
+
+    <!-- Mapbox JavaScript -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1Ijoic3JpZGhhcjA4IiwiYSI6ImNtN284Z212bzA5cmIybW9wcXc1enlpM20ifQ.BEcIZJ9lF9IPy_hSmcH-vQ';  // Replace with your token
+
+        let map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [80.2707, 13.0827],  // Default center (Chennai)
+            zoom: 12
+        });
+
+        function fetchNearbyStations(lat, lon) {
+            fetch(`/get_nearby_police_stations/?lat=${lat}&lon=${lon}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("loading").innerText = "Nearby Police Stations Found:";
+                
+                data.nearby_stations.forEach(station => {
+                    new mapboxgl.Marker({ color: "blue" })
+                        .setLngLat([station.longitude, station.latitude])
+                        .setPopup(new mapboxgl.Popup().setHTML(`<h4>${station.name}</h4><p>${station.distance} km away</p>`))
+                        .addTo(map);
+                });
+            })
+            .catch(error => {
+                document.getElementById("loading").innerText = "Error fetching data.";
+                console.error("Error:", error);
+            });
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                let userLat = position.coords.latitude;
+                let userLon = position.coords.longitude;
+
+                // Update map to user location
+                map.setCenter([userLon, userLat]);
+                map.setZoom(14);
+
+                // Mark user location
+                new mapboxgl.Marker({ color: "red" })
+                    .setLngLat([userLon, userLat])
+                    .setPopup(new mapboxgl.Popup().setHTML("<h4>Your Location</h4>"))
+                    .addTo(map);
+
+                // Fetch nearby police stations
+                fetchNearbyStations(userLat, userLon);
+            }, () => {
+                document.getElementById("loading").innerText = "Location access denied.";
+            });
+        } else {
+            document.getElementById("loading").innerText = "Geolocation is not supported.";
+        }
+    </script>
+
+</body>
+</html>

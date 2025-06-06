@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Room - {{ room_name }}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  
+      
+    }
+    body{
+      background:  -webkit-linear-gradient(bottom, #0250c5, #d43f8d);
+      min-height:100vh;
+    }
+   
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .page-container {
+      background-color: -webkit-linear-gradient(bottom, #0250c5, #d43f8d);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100vh;
+    }
+
+    .content {
+      width: 80%;
+      max-width: 500px;
+      padding: 2rem;
+      max-height: 80vh;
+      background-color: #eef0f2;
+      border-radius: 1rem;
+      box-shadow: 0px 0px 1rem 0px rgba(0, 0, 0, 0.2);
+      display: grid;
+      grid-template-rows: fit-content auto fit-content;
+    }
+
+    .chats-container {
+      width: 100%;
+      height: 20rem;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .chats-container::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .chats-container::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    textarea {
+      height: 4rem;
+      resize: none;
+      outline: none;
+      border: none;
+      padding: 0.5rem;
+      background-color: #dadee1;
+      border-radius: 0.5rem;
+      width: 100%;
+    }
+
+    button {
+      border: 0;
+      outline: 0;
+      padding: 0.5rem 0.75rem;
+      background-color: #1b1f24;
+      border-radius: 2rem;
+      color: #ffffff;
+      font-size: 1.25rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    button:hover {
+      background-color: #353a41;
+    }
+
+    form {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .single-message {
+      width: fit-content;
+      max-width: 60%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border-radius: 0.5rem;
+      word-wrap: break-word;
+    }
+
+    .sent {
+      background-color: #8c00ff;
+      color: white;
+      align-self: flex-end;
+    }
+
+    .received {
+      background-color: #ff7300;
+      color: white;
+    }
+
+    .sender {
+      font-size: 0.75rem;
+      margin-top: 0.25rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+
+<body>
+
+  
+
+
+  <div class="page-container">
+    <div class="content">
+      <h1>Welcome to {{ room_name }}</h1>
+      <div class="chats-container" id="chats-container">
+        {% for message in messages %}
+          <div class="single-message {% if message.sender|lower == user|lower %}sent{% else %}received{% endif %}">
+           
+            <p class="sender">
+              {% if message.sender|lower == user|lower %} Me {% else %} {{ message.sender }} {% endif %}
+              - {{ message.timestamp|date:"H:i" }}
+            </p>
+            <div class="msg-body">{{ message.message }}</div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <form id="msg-form">
+        {% csrf_token %}
+        <textarea name="message" id="message" placeholder="Enter your message"></textarea>
+        <button type="submit">&#10003;</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Corrected WebSocket URL
+    const socketURL = `ws://${window.location.host}/ws/chat/{{room_name}}/`;
+    console.log("Establishing Socket Connection...");
+
+    let socket = new WebSocket(socketURL);
+
+    socket.onopen = () => console.log("WebSocket Connected ✅");
+    socket.onclose = () => {
+      console.log("WebSocket Disconnected ❌. Retrying in 3 seconds...");
+      setTimeout(() => location.reload(), 3000);
+    };
+
+    // Scroll to bottom function
+    const chatsDiv = document.getElementById("chats-container");
+    const scrollToBottom = () => {
+      chatsDiv.scrollTop = chatsDiv.scrollHeight;
+    };
+
+    // Auto-scroll on page load
+    window.onload = scrollToBottom;
+
+    // Send Message
+    document.getElementById("msg-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      let message_sent = document.getElementById("message").value.trim();
+      if (message_sent === "") return; // Prevent empty messages
+
+      socket.send(
+        JSON.stringify({
+          message: message_sent,
+          room_name: "{{room_name}}",
+          sender: "{{user}}",
+        })
+      );
+
+      document.getElementById("message").value = ""; // Clear input field
+    });
+
+    // Receive Message
+    socket.addEventListener("message", (e) => {
+      const data = JSON.parse(e.data)["message"];
+      let sender = data["sender"];
+      let content = data["message"];
+      let timestamp = data["timestamp"];
+
+      let messageHTML = `
+        <div class="single-message ${sender === "{{user}}" ? "sent" : "received"}">
+    
+          <p class="sender">${sender === "{{user}}" ? "Me" : sender} - ${timestamp}</p>
+          <div class="msg-body">${content}</div>
+        </div>`;
+
+      chatsDiv.innerHTML += messageHTML;
+      scrollToBottom();
+    });
+</script>
+
+</body>
+
+</html>
