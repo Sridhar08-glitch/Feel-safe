@@ -153,6 +153,7 @@ FAST2SMS_API_KEY=""
 ALLOWED_HOSTS=['127.0.0.1','localhost','arnold-opinions-toolbar-perth.trycloudflare.com']
 
 CORS_ALLOW_ALL_ORIGINS=True
-TWILIO_ACCOUNT_SID=""
-TWILIO_AUTH_TOKEN=""
-TWILIO_PHONE_NUMBER=""
+
+
+TWILIO_ACCOUNT_SID = os.getenv('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.getenv('TWILIO_AUTH_TOKEN')
